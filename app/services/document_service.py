@@ -117,3 +117,16 @@ def save_parse_error(
     db.commit()
     db.refresh(document)
     return document
+
+
+def save_validation_result(
+    db: Session,
+    document: Document,
+    validation_result: dict,
+) -> Document:
+    document.validation_result = validation_result
+    document.validated_at = datetime.now(timezone.utc)
+    document.status = "validated"
+    db.commit()
+    db.refresh(document)
+    return document

@@ -30,6 +30,9 @@ class Document(Base):
     parsed_at = Column(DateTime(timezone=True), nullable=True)
     parse_error_message = Column(Text, nullable=True)
 
+    validation_result = Column(JSONB, nullable=True)
+    validated_at = Column(DateTime(timezone=True), nullable=True)
+
     uploaded_at = Column(DateTime(timezone=True), server_default=func.now())
 
     project = relationship("Project", back_populates="documents")

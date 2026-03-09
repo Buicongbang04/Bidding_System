@@ -60,6 +60,8 @@ async def upload_document_api(
             "parsed_data": document.parsed_data,
             "parsed_at": document.parsed_at,
             "parse_error_message": document.parse_error_message,
+            "validation_result": document.validation_result,
+            "validated_at": document.validated_at,
             "uploaded_at": document.uploaded_at,
         }
 
@@ -91,6 +93,8 @@ def list_documents_api(project_id: str, db: Session = Depends(get_db)):
             "parsed_data": doc.parsed_data,
             "parsed_at": doc.parsed_at,
             "parse_error_message": doc.parse_error_message,
+            "validation_result": doc.validation_result,
+            "validated_at": doc.validated_at,
             "uploaded_at": doc.uploaded_at,
         }
         for doc in documents
