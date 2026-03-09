@@ -68,7 +68,7 @@ def save_extracted_text(
     db: Session,
     document: Document,
     ocr_text: str,
-    status: str = "ocr_done",
+    status: str = "text_extracted",
 ) -> Document:
     document.ocr_text = ocr_text
     document.status = status
@@ -112,8 +112,8 @@ def save_parse_error(
     error_message: str,
 ) -> Document:
     document.parse_error_message = error_message
-    document.parsed_at = datetime.now(timezone.utc)
     document.status = "error"
+    document.parsed_at = datetime.now(timezone.utc)
     db.commit()
     db.refresh(document)
     return document

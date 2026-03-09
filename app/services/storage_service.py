@@ -6,16 +6,19 @@ from fastapi import UploadFile
 from app.core.config import settings
 
 
-ALLOWED_EXTENSIONS = {".pdf", ".docx", ".png", ".jpg", ".jpeg"}
+ALLOWED_EXTENSIONS = {
+    ".pdf",
+    ".doc",
+    ".docx",
+    ".png",
+    ".jpg",
+    ".jpeg"
+}
 
 DOCUMENT_TYPES = {
-    "QUYET_DINH_PHE_DUYET_DU_AN",
     "KE_HOACH_LUA_CHON_NHA_THAU",
-    "HO_SO_MOI_THAU",
-    "BAO_CAO_THAM_DINH",
-    "QUYET_DINH_PHE_DUYET_KET_QUA",
-    "THONG_BAO_MOI_THAU",
-    "KHAC",
+    "VAN_BAN_PHE_DUYET_NHA_THAU",
+    "QUYET_DINH",
 }
 
 

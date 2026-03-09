@@ -39,8 +39,8 @@ def ensure_document_parser_columns():
 
 
 app = FastAPI(
-    title="Tender AI - Module 1 + 2 + 3",
-    description="Upload hồ sơ, OCR/Extract text, Parse cấu trúc văn bản",
+    title="Tender AI MVP",
+    description="Upload hồ sơ, extract text, parse theo 3 loại văn bản cố định",
     version="1.0.0"
 )
 
@@ -59,4 +59,4 @@ app.include_router(parser_router)
 
 @app.get("/")
 def health_check():
-    return {"message": "Tender AI is running"}
+    return {"message": "Tender AI MVP is running"}

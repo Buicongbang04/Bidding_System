@@ -22,7 +22,7 @@ def extract_text_api(document_id: str, db: Session = Depends(get_db)):
     if not document.file_path:
         raise HTTPException(status_code=400, detail="Document không có file_path")
 
-    update_document_status(db, document, "ocr_processing")
+    update_document_status(db, document, "extracting_text")
 
     try:
         extracted_text = extract_text_by_file_type(
@@ -34,7 +34,7 @@ def extract_text_api(document_id: str, db: Session = Depends(get_db)):
             db=db,
             document=document,
             ocr_text=extracted_text,
-            status="ocr_done",
+            status="text_extracted",
         )
 
         preview = extracted_text[:500] if extracted_text else ""
@@ -69,6 +69,7 @@ def get_document_text_api(document_id: str, db: Session = Depends(get_db)):
     return {
         "document_id": str(document.id),
         "file_name": document.file_name,
+        "document_type": document.document_type,
         "status": document.status,
         "ocr_text": document.ocr_text,
         "error_message": document.error_message,
