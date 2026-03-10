@@ -54,8 +54,20 @@ def _parse_date(value: str | None) -> datetime | None:
 def _index_documents_by_type(documents: list) -> dict:
     result = {}
     for doc in documents:
-        result[doc.document_type] = doc
+        parsed_data = getattr(doc, "parsed_data", None) or {}
+        resolved_type = parsed_data.get("legacy_document_type") or doc.document_type
+        result[resolved_type] = doc
     return result
+
+
+def _get_field_value(document, field_name: str):
+    if not document or not document.parsed_data:
+        return None
+
+    direct_value = document.parsed_data.get(field_name)
+    if direct_value not in (None, "", [], {}):
+        return direct_value
+    return None
 
 
 def validate_project_documents(project_id: str, documents: list) -> dict:
@@ -81,16 +93,16 @@ def validate_project_documents(project_id: str, documents: list) -> dict:
 
     # Rule 1: package_name phải khớp
     if plan_doc and approval_doc and plan_doc.parsed_data and approval_doc.parsed_data:
-        plan_package_name = _normalize_text(plan_doc.parsed_data.get("package_name"))
-        approval_package_name = _normalize_text(approval_doc.parsed_data.get("package_name"))
+        plan_package_name = _normalize_text(_get_field_value(plan_doc, "package_name"))
+        approval_package_name = _normalize_text(_get_field_value(approval_doc, "package_name"))
 
         if plan_package_name and approval_package_name:
             if plan_package_name != approval_package_name:
                 errors.append({
                     "rule": "PACKAGE_NAME_MATCH",
                     "message": "Tên gói thầu giữa kế hoạch và phê duyệt không khớp",
-                    "plan_package_name": plan_doc.parsed_data.get("package_name"),
-                    "approval_package_name": approval_doc.parsed_data.get("package_name"),
+                    "plan_package_name": _get_field_value(plan_doc, "package_name"),
+                    "approval_package_name": _get_field_value(approval_doc, "package_name"),
                 })
         else:
             warnings.append({
@@ -100,23 +112,23 @@ def validate_project_documents(project_id: str, documents: list) -> dict:
 
     # Rule 2: approved_price <= package_price
     if plan_doc and approval_doc and plan_doc.parsed_data and approval_doc.parsed_data:
-        package_price = _parse_money(plan_doc.parsed_data.get("package_price"))
-        approved_price = _parse_money(approval_doc.parsed_data.get("approved_price"))
+        package_price = _parse_money(_get_field_value(plan_doc, "package_price"))
+        approved_price = _parse_money(_get_field_value(approval_doc, "approved_price"))
 
         if package_price is not None and approved_price is not None:
             if approved_price > package_price:
                 errors.append({
                     "rule": "PRICE_COMPARISON",
                     "message": "Giá phê duyệt lớn hơn giá gói thầu",
-                    "package_price": plan_doc.parsed_data.get("package_price"),
-                    "approved_price": approval_doc.parsed_data.get("approved_price"),
+                    "package_price": _get_field_value(plan_doc, "package_price"),
+                    "approved_price": _get_field_value(approval_doc, "approved_price"),
                 })
             elif approved_price < package_price * 0.5:
                 warnings.append({
                     "rule": "PRICE_WARNING",
                     "message": "Giá phê duyệt thấp hơn 50% giá gói thầu",
-                    "package_price": plan_doc.parsed_data.get("package_price"),
-                    "approved_price": approval_doc.parsed_data.get("approved_price"),
+                    "package_price": _get_field_value(plan_doc, "package_price"),
+                    "approved_price": _get_field_value(approval_doc, "approved_price"),
                 })
         else:
             warnings.append({
@@ -126,16 +138,16 @@ def validate_project_documents(project_id: str, documents: list) -> dict:
 
     # Rule 3: ngày phê duyệt phải sau hoặc bằng ngày kế hoạch
     if plan_doc and approval_doc and plan_doc.parsed_data and approval_doc.parsed_data:
-        plan_date = _parse_date(plan_doc.parsed_data.get("issued_date"))
-        approval_date = _parse_date(approval_doc.parsed_data.get("issued_date"))
+        plan_date = _parse_date(_get_field_value(plan_doc, "issued_date"))
+        approval_date = _parse_date(_get_field_value(approval_doc, "issued_date"))
 
         if plan_date and approval_date:
             if approval_date < plan_date:
                 errors.append({
                     "rule": "ISSUED_DATE_ORDER",
                     "message": "Ngày ban hành văn bản phê duyệt sớm hơn kế hoạch lựa chọn nhà thầu",
-                    "plan_issued_date": plan_doc.parsed_data.get("issued_date"),
-                    "approval_issued_date": approval_doc.parsed_data.get("issued_date"),
+                    "plan_issued_date": _get_field_value(plan_doc, "issued_date"),
+                    "approval_issued_date": _get_field_value(approval_doc, "issued_date"),
                 })
         else:
             warnings.append({
@@ -145,9 +157,7 @@ def validate_project_documents(project_id: str, documents: list) -> dict:
 
     # Rule 4: Quyết định phải có signer
     if decision_doc:
-        signer = None
-        if decision_doc.parsed_data:
-            signer = decision_doc.parsed_data.get("signer")
+        signer = _get_field_value(decision_doc, "signer")
 
         if not signer:
             errors.append({
@@ -157,11 +167,15 @@ def validate_project_documents(project_id: str, documents: list) -> dict:
 
     validation_status = "valid" if len(errors) == 0 else "invalid"
 
+    final_status = "FAIL" if errors else "WARNING" if warnings else "PASS"
+
     return {
         "project_id": project_id,
         "validation_status": validation_status,
         "errors": errors,
+        "violations": errors,
         "warnings": warnings,
+        "final_status": final_status,
         "checked_documents": checked_documents,
         "total_errors": len(errors),
         "total_warnings": len(warnings),

@@ -1,14 +1,23 @@
+from __future__ import annotations
+
+from app.core.config import settings
+from app.schemas.document_profiles import get_profile_by_legacy_type, supported_legacy_document_types
+from app.services.document_detector import detect_document_type
+from app.services.extraction_cache_service import (
+    build_extraction_cache_key,
+    load_cached_extraction,
+    save_cached_extraction,
+)
+from app.services.heuristic_extraction_service import run_heuristic_extraction
+from app.services.llm_extractor import (
+    extract_document_fields_with_llm,
+    find_missing_or_uncertain_fields,
+)
 from app.services.parser_common_service import normalize_text
-from app.services.parser_ke_hoach_service import parse_ke_hoach_lua_chon_nha_thau
-from app.services.parser_phe_duyet_service import parse_van_ban_phe_duyet_nha_thau
-from app.services.parser_quyet_dinh_service import parse_quyet_dinh
+from app.services.text_compression_service import build_compressed_context
 
 
-SUPPORTED_DOCUMENT_TYPES = {
-    "KE_HOACH_LUA_CHON_NHA_THAU",
-    "VAN_BAN_PHE_DUYET_NHA_THAU",
-    "QUYET_DINH",
-}
+SUPPORTED_DOCUMENT_TYPES = supported_legacy_document_types()
 
 
 def parse_document_by_type(document_type: str, ocr_text: str) -> dict:
@@ -20,13 +29,43 @@ def parse_document_by_type(document_type: str, ocr_text: str) -> dict:
     if document_type not in SUPPORTED_DOCUMENT_TYPES:
         raise ValueError(f"document_type không được hỗ trợ: {document_type}")
 
-    if document_type == "KE_HOACH_LUA_CHON_NHA_THAU":
-        return parse_ke_hoach_lua_chon_nha_thau(text)
+    detected = detect_document_type(text=text, hinted_document_type=document_type)
+    profile = get_profile_by_legacy_type(detected["legacy_type"])
 
-    if document_type == "VAN_BAN_PHE_DUYET_NHA_THAU":
-        return parse_van_ban_phe_duyet_nha_thau(text)
+    cache_key = build_extraction_cache_key(
+        document_type=profile.legacy_type,
+        text=text,
+        model_name=settings.ollama_model,
+    )
+    cached_extraction = load_cached_extraction(cache_key)
+    if cached_extraction:
+        extraction = cached_extraction
+    else:
+        heuristic_fields = run_heuristic_extraction(text=text, profile=profile)
+        target_fields = find_missing_or_uncertain_fields(profile=profile, fields=heuristic_fields)
+        compressed_text = build_compressed_context(
+            text=text,
+            profile=profile,
+            target_fields=target_fields,
+        )
 
-    if document_type == "QUYET_DINH":
-        return parse_quyet_dinh(text)
+        extraction = extract_document_fields_with_llm(
+            text=compressed_text or text[:5000],
+            profile=profile,
+            target_fields=target_fields,
+            existing_fields=heuristic_fields,
+        )
+        save_cached_extraction(cache_key, extraction)
 
-    raise ValueError(f"Không tìm thấy parser cho document_type={document_type}")
+    parsed_data = {
+        "document_type": extraction["document_type"],
+        "legacy_document_type": profile.legacy_type,
+        "raw_text_preview": text[:1000],
+    }
+    parsed_data.update(extraction["fields"])
+    parsed_data["uncertain_fields"] = [
+        field_name
+        for field_name, status in (extraction.get("field_statuses") or {}).items()
+        if status == "uncertain"
+    ]
+    return parsed_data

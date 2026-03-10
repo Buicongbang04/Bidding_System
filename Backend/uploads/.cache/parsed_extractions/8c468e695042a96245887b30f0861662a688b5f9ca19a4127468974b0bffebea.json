@@ -1,0 +1,28 @@
+{
+  "document_type": "bid_approval",
+  "fields": {
+    "package_name": "Gói thầu số 05 - Xây dựng và triển khai hệ thống quản lý dữ liệu đấu thầu",
+    "approved_contractor": "Công ty Cổ phần Công nghệ Minh Phát",
+    "approved_price": "18.500.000.000 đồng",
+    "contract_type": "Hợp đồng trọn gói",
+    "contract_duration": "12 tháng",
+    "approval_result": "Nhà thầu đáp ứng đầy đủ yêu cầu kỹ thuật, tài chính và được phê duyệt trúng thầu để triển khai gói thầu theo hồ sơ mời thầu",
+    "approval_date": "12/03/2026",
+    "signer": "Nguyễn Văn Minh",
+    "funding_source": null,
+    "notes": "Giá trúng thầu đã bao gồm toàn bộ thuế, phí và chi phí triển khai",
+    "issued_date": "12/03/2026"
+  },
+  "field_statuses": {
+    "package_name": "found",
+    "approved_contractor": "found",
+    "approved_price": "found",
+    "contract_type": "found",
+    "contract_duration": "found",
+    "approval_result": "found",
+    "approval_date": "found",
+    "signer": "found",
+    "funding_source": "missing",
+    "notes": "found"
+  }
+}

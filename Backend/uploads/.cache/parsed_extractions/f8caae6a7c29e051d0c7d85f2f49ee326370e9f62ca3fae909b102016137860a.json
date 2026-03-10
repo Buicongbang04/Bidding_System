@@ -1,0 +1,30 @@
+{
+  "document_type": "bid_opening_decision",
+  "fields": {
+    "package_name": "Gói triển khai phần mềm quản lý dữ liệu",
+    "opening_time": null,
+    "opening_location": null,
+    "inviting_party": null,
+    "issue_date": "11/03/2026",
+    "signer": "Căn Cứ Nhu Cầu Triển Khai Dự Án;",
+    "participants": [
+      "Uy Ban Nhan Dan Thanh Pho Ha Noi",
+      "Ban Quan Ly Du An Chuyen Doi So"
+    ],
+    "opening_method": null,
+    "notes": "phê duyệt kết quả lựa chọn đơn vị thực hiện",
+    "issued_date": "11/03/2026",
+    "decision_subject": "phê duyệt kết quả lựa chọn đơn vị thực hiện"
+  },
+  "field_statuses": {
+    "package_name": "found",
+    "opening_time": "missing",
+    "opening_location": "missing",
+    "inviting_party": "missing",
+    "issue_date": "found",
+    "signer": "found",
+    "participants": "found",
+    "opening_method": "missing",
+    "notes": "found"
+  }
+}

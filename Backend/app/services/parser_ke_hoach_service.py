@@ -18,7 +18,7 @@ def parse_ke_hoach_lua_chon_nha_thau(text: str) -> dict:
         ),
         "package_price": extract_text_after_label(
             text,
-            ["Giá gói thầu", "Giá gói"]
+            ["Giá gói thầu", "Giá gói", "Đầu tư"]
         ),
         "funding_source": extract_text_after_label(
             text,

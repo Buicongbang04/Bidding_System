@@ -1,0 +1,36 @@
+{
+  "document_type": "procurement_plan",
+  "fields": {
+    "project_name": "Xây dựng hệ thống quản lý dữ liệu đấu thầu điện tử quốc gia",
+    "package_name": "Gói thầu số 01 - Xây dựng và triển khai hệ thống phần mềm quản lý đấu thầu",
+    "package_price": "25.000.000.000 đồng",
+    "investor": "Công ty Cổ phần Công nghệ Số Việt Nam",
+    "selection_method": "Đấu thầu rộng rãi trong nước qua mạng",
+    "contractor_selection_method": "Một giai đoạn một túi hồ sơ",
+    "contract_type": "Hợp đồng trọn gói",
+    "contract_duration": "12 tháng",
+    "approval_date": "12/03/2026",
+    "signer": "Nguyễn Văn Minh",
+    "funding_source": "Ngân sách nhà nước và vốn chuyển đổi số quốc gia",
+    "start_time_for_selection": "45 ngày kể từ ngày phát hành hồ sơ mời thầu",
+    "notes": null,
+    "issued_date": "12/03/2026",
+    "implementation_time": "12 tháng",
+    "bid_organization_time": "45 ngày kể từ ngày phát hành hồ sơ mời thầu"
+  },
+  "field_statuses": {
+    "project_name": "found",
+    "package_name": "found",
+    "package_price": "found",
+    "investor": "found",
+    "selection_method": "found",
+    "contractor_selection_method": "found",
+    "contract_type": "found",
+    "contract_duration": "found",
+    "approval_date": "found",
+    "signer": "found",
+    "funding_source": "found",
+    "start_time_for_selection": "found",
+    "notes": "missing"
+  }
+}

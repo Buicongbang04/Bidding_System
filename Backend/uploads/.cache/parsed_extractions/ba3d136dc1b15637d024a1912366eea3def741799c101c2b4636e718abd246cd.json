@@ -1,0 +1,36 @@
+{
+  "document_type": "procurement_plan",
+  "fields": {
+    "project_name": "Hệ thống số hóa hồ sơ hành chính",
+    "package_name": "Gói thầu xây dựng phần mềm quản lý dữ liệu",
+    "package_price": null,
+    "investor": "Ủy ban nhân dân tỉnh",
+    "selection_method": "Lựa chọn nhà thầu phù hợp",
+    "contractor_selection_method": "Lựa chọn nhà thầu phù hợp",
+    "contract_type": null,
+    "contract_duration": "Khoảng 1 năm",
+    "approval_date": "15/03/2026",
+    "signer": "(Ký)",
+    "funding_source": "Đang đề xuất bố trí từ ngân sách địa phương",
+    "start_time_for_selection": null,
+    "notes": "Đề nghị cơ quan có thẩm quyền xem xét phê duyệt chủ trương để tiếp tục hoàn thiện kế hoạch lựa chọn nhà thầu.",
+    "issued_date": "15/03/2026",
+    "implementation_time": "Khoảng 1 năm",
+    "bid_organization_time": null
+  },
+  "field_statuses": {
+    "project_name": "found",
+    "package_name": "found",
+    "package_price": "missing",
+    "investor": "found",
+    "selection_method": "found",
+    "contractor_selection_method": "found",
+    "contract_type": "missing",
+    "contract_duration": "found",
+    "approval_date": "found",
+    "signer": "found",
+    "funding_source": "found",
+    "start_time_for_selection": "missing",
+    "notes": "found"
+  }
+}

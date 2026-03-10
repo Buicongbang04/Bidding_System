@@ -1,0 +1,27 @@
+{
+  "document_type": "bid_opening_decision",
+  "fields": {
+    "package_name": "Gói thầu số 03 - Mua sắm và triển khai phần mềm quản lý dữ liệu đấu thầu",
+    "opening_time": "08:30 ngày 10/03/2026",
+    "opening_location": "Phòng họp tầng 5, Ban Quản lý Dự án Chuyển đổi số, Hà Nội",
+    "inviting_party": "Ban Quản lý Dự án Chuyển đổi số",
+    "issue_date": "10/03/2026",
+    "signer": "Nguyễn Văn Minh",
+    "participants": "Tổ chuyên gia đấu thầu, đại diện chủ đầu tư, đại diện bên mời thầu",
+    "opening_method": "Mở thầu trực tiếp kết hợp qua mạng",
+    "notes": "Việc mở thầu được thực hiện công khai, minh bạch và đúng thời gian quy định",
+    "issued_date": "10/03/2026",
+    "decision_subject": "Việc mở thầu được thực hiện công khai, minh bạch và đúng thời gian quy định"
+  },
+  "field_statuses": {
+    "package_name": "found",
+    "opening_time": "found",
+    "opening_location": "found",
+    "inviting_party": "found",
+    "issue_date": "found",
+    "signer": "found",
+    "participants": "found",
+    "opening_method": "found",
+    "notes": "found"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "document_type": "bid_approval",
+  "fields": {
+    "package_name": "Gói thầu số 03 - Mua sắm và triển khai phần mềm quản lý dữ liệu đấu thầu",
+    "approved_contractor": "Công ty Cổ phần Giải pháp Công nghệ Minh Phát",
+    "approved_price": "18.450.000.000 đồng (Mười tám tỷ bốn trăm năm mươi triệu đồng)",
+    "contract_type": null,
+    "contract_duration": "10 tháng",
+    "approval_result": "Nhà thầu đáp ứng yêu cầu về năng lực, kinh nghiệm, kỹ thuật và tài chính; được phê duyệt trúng thầu để triển khai gói thầu theo hồ sơ mời thầu và hồ sơ dự thầu đã được đánh giá đạt yêu cầu",
+    "approval_date": "10/03/2026",
+    "signer": "Căn Cứ Luật Đấu Thầu Ngày 23 Tháng 6 Năm 2023;",
+    "funding_source": null,
+    "notes": "Giá phê duyệt đã bao gồm thuế, phí và toàn bộ chi phí triển khai, đào tạo, bảo hành theo hồ sơ mời thầu",
+    "issued_date": "10/03/2026"
+  },
+  "field_statuses": {
+    "package_name": "found",
+    "approved_contractor": "found",
+    "approved_price": "found",
+    "contract_type": "missing",
+    "contract_duration": "found",
+    "approval_result": "found",
+    "approval_date": "found",
+    "signer": "found",
+    "funding_source": "uncertain",
+    "notes": "found"
+  }
+}

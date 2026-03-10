@@ -1,0 +1,28 @@
+{
+  "document_type": "bid_approval",
+  "fields": {
+    "package_name": "Căn cứ đề xuất của Ban quản lý dự án",
+    "approved_contractor": "Công ty TNHH Công nghệ Sao Việt",
+    "approved_price": "18.700.000.000 đồng",
+    "contract_type": null,
+    "contract_duration": "khoảng 12 tháng",
+    "approval_result": "Đồng ý lựa chọn đơn vị nêu trên để tiếp tục thương thảo hợp đồng",
+    "approval_date": "13/03/2026",
+    "signer": "Trần Văn Nam",
+    "funding_source": null,
+    "notes": "thông qua đơn vị thực hiện gói thầu",
+    "issued_date": "13/03/2026"
+  },
+  "field_statuses": {
+    "package_name": "found",
+    "approved_contractor": "found",
+    "approved_price": "found",
+    "contract_type": "missing",
+    "contract_duration": "found",
+    "approval_result": "found",
+    "approval_date": "found",
+    "signer": "found",
+    "funding_source": "missing",
+    "notes": "found"
+  }
+}

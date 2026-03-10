@@ -4,6 +4,7 @@ from pathlib import Path
 from fastapi import UploadFile
 
 from app.core.config import settings
+from app.schemas.document_profiles import supported_legacy_document_types
 
 
 ALLOWED_EXTENSIONS = {
@@ -15,11 +16,7 @@ ALLOWED_EXTENSIONS = {
     ".jpeg"
 }
 
-DOCUMENT_TYPES = {
-    "KE_HOACH_LUA_CHON_NHA_THAU",
-    "VAN_BAN_PHE_DUYET_NHA_THAU",
-    "QUYET_DINH",
-}
+DOCUMENT_TYPES = supported_legacy_document_types()
 
 
 def ensure_upload_dir() -> None:

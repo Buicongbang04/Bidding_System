@@ -1,0 +1,36 @@
+{
+  "document_type": "procurement_plan",
+  "fields": {
+    "project_name": "Trang bị một số phương tiện bảo vệ cá nhân năm 2024",
+    "package_name": "Trang bị một số phương tiện bảo vệ cá nhân năm 2024",
+    "package_price": null,
+    "investor": "Tập đoàn xăng dầu Việt Nam",
+    "selection_method": null,
+    "contractor_selection_method": null,
+    "contract_type": null,
+    "contract_duration": null,
+    "approval_date": "23/06/2023",
+    "signer": "Công Ty Tnhh Mtv Xăng Dau Quang Ngai",
+    "funding_source": null,
+    "start_time_for_selection": null,
+    "notes": "phê duyệt kế hoạch lựa chọn nhà th",
+    "issued_date": "23/06/2023",
+    "implementation_time": null,
+    "bid_organization_time": null
+  },
+  "field_statuses": {
+    "project_name": "found",
+    "package_name": "found",
+    "package_price": "missing",
+    "investor": "found",
+    "selection_method": "missing",
+    "contractor_selection_method": "missing",
+    "contract_type": "missing",
+    "contract_duration": "missing",
+    "approval_date": "found",
+    "signer": "found",
+    "funding_source": "missing",
+    "start_time_for_selection": "missing",
+    "notes": "found"
+  }
+}
