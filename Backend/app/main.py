@@ -14,6 +14,8 @@ from app.api.parser_api import router as parser_router
 from app.api.validation_api import router as validation_router
 from app.api.project_validation_api import router as project_validation_router
 
+# CORS
+from fastapi.middleware.cors import CORSMiddleware
 
 def create_tables():
     Base.metadata.create_all(bind=engine)
@@ -60,6 +62,14 @@ app = FastAPI(
     title="Tender AI MVP",
     description="Upload hồ sơ, extract text, parse, validate document và cross validate project",
     version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5173", "http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
